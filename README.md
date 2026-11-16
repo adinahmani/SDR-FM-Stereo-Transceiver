@@ -65,28 +65,28 @@ RECEIVER (RX) CHAIN:                                                            
 ### 1. Real-Time Hardware Capture (NI USRP & LabVIEW)
 The raw over-the-air baseband RF stream is captured at $1\text{ MS/s}$ (Nyquist bandwidth of $1\text{ MHz}$) with a $30\text{ dB}$ receiver front-end gain:
 
-![Hardware Capture](assets/hardware_capture_labview.png)
+![Hardware Capture](hardware_capture_labview.png)
 
 ---
 
 ### 2. Baseband Interpolation & Transmit Spectrum
 To feed data seamlessly to the USRP DAC hardware layer, the signal undergoes high-rate interpolation to $1\text{ MHz}$. The anti-imaging filter ensures sharp out-of-band suppression:
 
-![Interpolation & Spectrum](assets/baseband_interpolation_spectrum.png)
+![Interpolation & Spectrum](baseband_interpolation_spectrum.png)
 
 ---
 
 ### 3. Receiver Processing & Decimation Stages
 The received $1\text{ MHz}$ signal is decimated by a factor of 5 down to $200\text{ kHz}$, followed by the phase discriminator loop to reconstruct the baseband audio envelope:
 
-![Receiver Stages](assets/signal_stages_decimation.png)
+![Receiver Stages](signal_stages_decimation.png)
 
 ---
 
 ### 4. Transmitted vs. Demodulated Audio Waveform Tracking
 Zoomed-in time-domain comparison between the transmitted audio (solid blue line) and recovered demodulated signal (dashed red line):
 
-![Waveform Tracking](assets/audio_waveform_comparison.png)
+![Waveform Tracking](audio_waveform_comparison.png)
 
 The recovered waveform matches the original tone with exceptional precision across all dynamic transitions and micro-peaks.
 
@@ -107,11 +107,10 @@ The recovered waveform matches the original tone with exceptional precision acro
 ├── WR_bin_file.m                  # Binary file writer for streaming IQ samples to hardware
 ├── music1.wav                     # Test audio sample (Left channel)
 ├── piano2.wav                     # Test audio sample (Right channel)
-└── assets/                        # Hardware captures, spectral plots, and visual results
-    ├── hardware_capture_labview.png
-    ├── baseband_interpolation_spectrum.png
-    ├── signal_stages_decimation.png
-    └── audio_waveform_comparison.png
+├── hardware_capture_labview.png   # Real-time USRP IQ hardware capture
+├── baseband_interpolation_spectrum.png # USRP 1 MHz interpolation & spectral analysis
+├── signal_stages_decimation.png   # Receiver decimation & demodulation stages
+└── audio_waveform_comparison.png  # Transmitted vs. received waveform tracking overlay
 ```
 
 ---
